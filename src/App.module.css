@@ -55,6 +55,11 @@ body {
   outline: 0;
 }
 
+.container .leftSide input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .container .leftSide button {
   background-color: var(--bg-button);
   color: var(--text-white);
@@ -70,6 +75,11 @@ body {
 
 .container .leftSide button:hover {
   opacity: 0.85;
+}
+
+.container .leftSide button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .container .rightSide {
