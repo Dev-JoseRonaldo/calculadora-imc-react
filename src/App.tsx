@@ -21,6 +21,7 @@ function App() {
   const handleBackButton = () =>{
     setSToShow(null);
     setHeightField(0);
+    setWeigthField(0);
   }
 
   return (
