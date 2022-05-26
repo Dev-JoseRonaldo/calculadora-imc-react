@@ -2,7 +2,7 @@ export type Level = {
   title: string;
   color: string;
   icon: 'down' | 'up';
-  imc: number[],
+  imc: [number, number],
   yourImc?: number;
 }
 

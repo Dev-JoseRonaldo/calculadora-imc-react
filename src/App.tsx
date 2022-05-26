@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import styles from './App.module.css';
 import logo from './assets/imgLogo.png';
-import { levels, calculateImc} from './helpers/imc';
+import { levels, calculateImc, Level} from './helpers/imc';
 import { GridItem } from './components/GridItem';
 
 function App() {
   const [heightField, setHeightField] = useState<number>(0);
   const [weigthField, setWeigthField] = useState<number>(0);
+  const [toShow, setSToShow] = useState <Level | null>(null);
 
   const handleCalculateButton = () => {
     if(heightField && weigthField){
-
+      setSToShow(calculateImc(heightField, weigthField));
     } else{
       alert('Digite todos os campos!!!');
     }
@@ -31,14 +32,14 @@ function App() {
 
           <input 
           type="number"
-          placeholder="Digite a sua altura. Ex: 1.5 (em metros)"
+          placeholder="Digite a sua altura. Ex: 1.7 (em metros)"
           value={ heightField > 0 ? heightField : ''}
           onChange={e => setHeightField(parseFloat(e.target.value))}
           />
           
         <input 
           type="number"
-          placeholder="Digite a seu peso. Ex: 1.5 (em metros)"
+          placeholder="Digite a seu peso. Ex: 60.3 (em kg)"
           value={ weigthField > 0 ? weigthField : ''}
           onChange={e => setWeigthField(parseFloat(e.target.value))}
           />
@@ -47,11 +48,20 @@ function App() {
         </div>
 
         <div className={styles.rightSide}>
-          <div className={styles.grid}>
-            {levels.map((item, key) => (
-              <GridItem key={key} item={item}/>
-            ))}
-          </div>
+          {!toShow &&
+            <div className={styles.grid}>
+              {levels.map((item, key) => (
+                <GridItem key={key} item={item}/>
+              ))}
+            </div>
+          }
+          {toShow &&
+            <div className={styles.rightBig}>
+              <div className={styles.rightArrow}></div>
+              <GridItem item={toShow}/>
+            </div>
+          
+          }
         </div>
       </div>
     </div>
